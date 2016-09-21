@@ -9,7 +9,7 @@
     },
     "redis": {
         "host": "127.0.0.1",
-        "port": 6379,
+        "port": 6379
     },
     "ucloud": {
         "public_key": "UUztwD49TCzQ39diGb2T4a/0uYMwE6/PWII6fWwtuCiDQRQBfslLNg==",

@@ -128,6 +128,10 @@ def _handle_scores(obj):
 def crawl(time):
     url = "http://stats.nba.com/stats/scoreboard?DayOffset=0&LeagueID=00&gameDate=%s" % time.strftime("%m/%d/%Y")
     resp = network.req("GET", url)
+    if resp.status_code != 200:
+        logging.warn("get resp error: %s" % resp.status_code)
+        return
+
     obj = json.loads(resp.content)
     for result in obj["resultSets"]:
         if result["name"] == "EastConfStandingsByDay":
@@ -138,4 +142,3 @@ def crawl(time):
             _handle_matches(result)
         if result["name"] == "LineScore":
             _handle_scores(result)
-    
