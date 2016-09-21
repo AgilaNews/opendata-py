@@ -7,6 +7,10 @@
         "db": "banews",
         "charset": "utf8mb4"
     },
+    "redis": {
+        "host": "10.8.14.136",
+        "port": 6379
+    },
     "ucloud": {
         "public_key": "UUztwD49TCzQ39diGb2T4a/0uYMwE6/PWII6fWwtuCiDQRQBfslLNg==",
         "private_key": "ef1716513ea5eb553737d08ce056e30ed9510d72",
