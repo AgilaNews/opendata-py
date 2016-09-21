@@ -13,7 +13,8 @@ def _get_team_logo(abbr):
 
     with Image(blob = resp.content, format="svg") as image:
         with image.convert('png') as png:
-            return env.saver.save_stream(png.make_blob(), "nba", abbr + ".png", "image/png")
+            if env.saver.save_stream(png.make_blob(), "nba", abbr + ".png", "image/png"):
+                return env.conf["cdn"] + "/nba/%s.png" % (abbr)
 
 def _parse_team_common_info(obj):
     field = {}

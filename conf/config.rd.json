@@ -19,5 +19,6 @@
         "url_proxy": ".hk.ufileos.com",
         "download": ".ufile.ucloud.com.cn",
         "connection_timeout": 60
-    }
+    },
+    "cdn": "http://s1.agilanews.com"
 }

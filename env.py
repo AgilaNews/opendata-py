@@ -4,6 +4,8 @@ import socket
 import os
 import logging
 import logging.handlers as ih
+
+from redis import StrictRedis
 from img.imagesaver import ImageSaver
 
 from sqlalchemy import engine, MetaData, create_engine
@@ -17,6 +19,7 @@ elif socket.gethostname() == "sandbox-1":
 else:
     run_env = "rd"
 
+conf = {}
 with open(os.path.join(root_dir, "conf", "config." + run_env + ".json")) as fd:
     content = fd.read()
     conf = json.loads(content)
@@ -45,6 +48,7 @@ rootLogger = logging.getLogger("")
 rootLogger.setLevel(logging.INFO)
 rootLogger.addHandler(WFHandler("/data/logs/opendata_crawler/crawler.log"))
 
+redis = StrictRedis(host = conf["redis"]["host"], port = conf["redis"]["port"])
 meta = MetaData()
 engine = create_engine("mysql://%s:%s@%s:%s/%s?charset=%s&use_unicode=0" \
                        %(conf["mysql"]["user"], conf["mysql"]["password"], conf["mysql"]["host"], \
