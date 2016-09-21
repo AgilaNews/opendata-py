@@ -20,6 +20,8 @@ def _parse_team_common_info(obj):
     for idx, header in enumerate(obj["headers"]):
         field[header] = idx
 
+    if len(obj["rowSet"]) == 0:
+        return False
     rows = obj["rowSet"][0]
     team_id = rows[field["TEAM_ID"]]
     team = teamdao.getByTeamId(team_id)
@@ -36,12 +38,15 @@ def _parse_team_common_info(obj):
     values["code"] = rows[field["TEAM_CODE"]]
     values["logo"] = _get_team_logo(values["abbr"])
     
-    teamdao.save(values, team_id)
+    return teamdao.save(values, team_id)
     
 def crawl(team_id, season):
-    resp = network.req("GET", "http://stats.nba.com/stats/teaminfocommon?LeagueID=00&SeasonType=Regular+Season&TeamID=%s&season=%s" % (team_id, season))
+    url = "http://stats.nba.com/stats/teaminfocommon?LeagueID=00&SeasonType=Regular+Season&TeamID=%s&season=%s" % (team_id, season)
+    resp = network.req("GET", url)
     obj = json.loads(resp.content)
-
+    
     for result in obj["resultSets"]:
         if result["name"] == "TeamInfoCommon":
-            _parse_team_common_info(result)
+            if not _parse_team_common_info(result):
+                logging.warn("unknown team [%s]: [%s]" % (url, team_id))
+                return False

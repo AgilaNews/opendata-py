@@ -13,6 +13,7 @@ team_table = env.meta.tables["tb_nba_team"]
 cols = team_table.c
 
 def save(values, id = None):
+    values["update_time"] = time.time()
     if id:
         i = update(team_table).where(cols.team_id == id).values(**values)
     else:
