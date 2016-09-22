@@ -117,10 +117,12 @@ def _handle_scores(obj):
 
         values = {}
         
-        if team_id == match.home_team_id:
+    
+
+        if str(team_id) == str(match.home_team_id):
             values["home_team_points"] = pts
-        elif team_id == match.visitor_team_id:
-            value["visitor_team_points"] = pts
+        elif str(team_id) == str(match.visitor_team_id):
+            values["visitor_team_points"] = pts
         else:
             logging.warn("unknown team points: %s" % team_id)
             continue
