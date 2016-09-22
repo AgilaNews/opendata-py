@@ -3,8 +3,8 @@
         "host": "10.8.22.123",
         "port": 3306,
         "user": "banews_w",
-        "passwd": "MhxzKhl-Happy",
-        "database": "banews",
+        "password": "MhxzKhl-Happy",
+        "db": "banews",
         "charset": "utf8mb4"
     },
     "redis": {

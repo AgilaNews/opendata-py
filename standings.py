@@ -68,6 +68,8 @@ def _handle_matches(obj):
             t = datetime.datetime.strptime(match[fields["GAME_STATUS_TEXT"]], "%I:%M %p ET")
             f = time.mktime(datetime.datetime.combine(d.date(), t.time()).timetuple())
             f = f + et_off - tz_off   
+        else:
+            f = 0
         
         season = seasondao.getByYear(year)
         if not season:
@@ -116,8 +118,6 @@ def _handle_scores(obj):
             continue
 
         values = {}
-        
-    
 
         if str(team_id) == str(match.home_team_id):
             values["home_team_points"] = pts
