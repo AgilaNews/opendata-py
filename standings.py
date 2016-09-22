@@ -10,7 +10,7 @@ import logging
 import teams
 import time
 tz_off = time.timezone
-et_off = 5 * 3600
+et_off = 4 * 3600
 
 def _check_team(team_id, season):
     team = teamdao.getByTeamId(team_id)
