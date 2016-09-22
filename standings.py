@@ -9,6 +9,8 @@ import json
 import logging
 import teams
 import time
+tz_off = time.timezone
+et_off = 5 * 3600
 
 def _check_team(team_id, season):
     team = teamdao.getByTeamId(team_id)
@@ -65,6 +67,7 @@ def _handle_matches(obj):
             d = datetime.datetime.strptime(match[fields["GAME_DATE_EST"]], "%Y-%m-%dT%H:%M:%S")
             t = datetime.datetime.strptime(match[fields["GAME_STATUS_TEXT"]], "%I:%M %p ET")
             f = time.mktime(datetime.datetime.combine(d.date(), t.time()).timetuple())
+            f = f - et_off + tz_off   
         
         season = seasondao.getByYear(year)
         if not season:
