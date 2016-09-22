@@ -67,7 +67,7 @@ def _handle_matches(obj):
             d = datetime.datetime.strptime(match[fields["GAME_DATE_EST"]], "%Y-%m-%dT%H:%M:%S")
             t = datetime.datetime.strptime(match[fields["GAME_STATUS_TEXT"]], "%I:%M %p ET")
             f = time.mktime(datetime.datetime.combine(d.date(), t.time()).timetuple())
-            f = f - et_off + tz_off   
+            f = f + et_off - tz_off   
         
         season = seasondao.getByYear(year)
         if not season:
