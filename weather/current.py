@@ -54,7 +54,7 @@ def current(soup,city_id):
             list.append(6)
 
         value = {
-            "time":int(time.time()),
+            "timestamp":int(time.time()),
             "cityid": city_id,
             "now": {
                 "temperature": float(temperature[0]),
@@ -96,7 +96,7 @@ def current(soup,city_id):
         humidity = re.findall('[0-9]+', str(td[4].string))
         if len(list) == 0:
             value = {
-                "time": int(time.time()),
+                "timestamp": int(time.time()),
                 "cityid": city_id,
                 "now": {
                     "temperature": float(temperature[0]),
