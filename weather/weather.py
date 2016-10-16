@@ -32,7 +32,7 @@ def new():
             redisvalue = json.dumps(value)
             env.redis.set(rediskey, redisvalue)
             changenum = changenum +1
-            #time.sleep(3)
+            time.sleep(3)
         except Exception,e:
             errormessage= 'city_id '+str(city_id)+' weather did not change, INFO: '
             logging.info(errormessage+e.message)
