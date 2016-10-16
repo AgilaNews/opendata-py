@@ -54,7 +54,7 @@ def current(soup,city_id):
             list.append(6)
 
         value = {
-            "time":int(time.time()),
+            "timestamp":int(time.time()),
             "cityid": city_id,
             "now": {
                 "temperature": float(temperature[0]),
@@ -110,8 +110,6 @@ def current(soup,city_id):
                 },
             }
         else:
-            print city_id
-            print list
             for i in list:
                 if i == 1:
                     value['now']['temperature'] = float(temperature[0])
