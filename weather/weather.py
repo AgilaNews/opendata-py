@@ -14,7 +14,7 @@ import time
 
 table = env.meta.tables["tb_city"]
 cols = table.c
-s = select([table])
+s = select([table]).where(cols.status == 1)
 result=env.engine.execute(s).fetchall()
 
 def new():

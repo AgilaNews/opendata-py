@@ -110,8 +110,6 @@ def current(soup,city_id):
                 },
             }
         else:
-            print city_id
-            print list
             for i in list:
                 if i == 1:
                     value['now']['temperature'] = float(temperature[0])
