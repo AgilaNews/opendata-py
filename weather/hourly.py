@@ -12,6 +12,6 @@ def my_job():
 
 weather.new()
 sched = BlockingScheduler()
-sched.add_job(my_job, 'interval', seconds=600)
+sched.add_job(my_job, 'interval', seconds=1800)
 sched.start()
 
