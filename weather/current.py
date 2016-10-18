@@ -39,17 +39,18 @@ def current(soup,city_id):
         direct = re.findall('[SWEN]+', str(td[0]))
 
         if len(direct) == 0:
-            flag=1
+            flag = 1
             list.append(4)
         direction = ''.join(direct)
 
         gusts = re.findall('[0-9]+ ', str(td[1]))
         if len(gusts) == 0:
             gusts=['0']
-            flag=5
+            flag = 1
             list.append(5)
         humidity=re.findall('[0-9]+',str(td[3].string))
         if len(humidity)==0:
+            flag = 1
             humidity=[0]
             list.append(6)
 
