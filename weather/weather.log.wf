@@ -1,2 +1,0 @@
-[2016-10-15 12:38:15,007][base.py:120][WARNING]: Run time of job "my_job (trigger: interval[0:10:00], next run at: 2016-10-15 12:41:43 CST)" was missed by 0:06:31.080000
-[2016-10-15 13:57:27,987][base.py:943][WARNING]: Execution of job "my_job (trigger: interval[0:10:00], next run at: 2016-10-15 12:51:43 CST)" skipped: maximum number of running instances reached (1)
