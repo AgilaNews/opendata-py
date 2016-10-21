@@ -27,4 +27,4 @@ def req(method, url, headers = {}, data = None):
     _h["User-Agent"] = _get_random_ua()
     _h["Referer"] = "http://weather.com.ph"
     
-    return requests.request(method, url, headers = _h, data = data)
+    return requests.request(method, url, headers = _h, data = data, timeout=10)

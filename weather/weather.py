@@ -11,18 +11,25 @@ import network
 import future
 import bs4 as BeautifulSoup
 import time
+import traceback
 
 table = env.meta.tables["tb_city"]
 cols = table.c
 s = select([table]).where(cols.status == 1)
 result=env.engine.execute(s).fetchall()
 
+def fixTodayMaxTem(redis_key, weather_value):
+    weatherinfo = env.redis.get(redis_key)
+    MaxTem =json.loads
+
 def new():
     changenum=0
+    exit(-1) 
     for x in result:
         city_id = x[1]
+        url = x[7]
         try:
-            res = network.req("get", "http://weather.com.ph/view/" + str(city_id))
+            res = network.req("get", str(url))
             if res.status_code != 200:
                 raise Exception(str(res.status_code) + "network error")
             soup = BeautifulSoup.BeautifulSoup(res.text)
@@ -36,5 +43,6 @@ def new():
         except Exception,e:
             errormessage= 'city_id '+str(city_id)+' weather did not change, INFO: '
             logging.info(errormessage+e.message)
+            logging.info(traceback.format_exc())
     logging.info(str(changenum)+'cities weather are updated')
 
