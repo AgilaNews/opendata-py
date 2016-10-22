@@ -18,7 +18,8 @@ cols = table.c
 s = select([table]).where(cols.status == 1)
 result=env.engine.execute(s).fetchall()
 
-def fixTodayMaxTem(weather_value):
+def fixData(weather_value):
+    weather_value["days"][0]["weekday"] = "Today"
     if int(weather_value["now"]["temperature"]) > weather_value["days"][0]["temperature"][0]:
         weather_value["days"][0]["temperature"][0] = int(weather_value["now"]["temperature"])
         
@@ -27,7 +28,6 @@ def new():
     for x in result:
         city_id = x[1]
         url = x[7]
-        print url
         try:
             res = network.req("get", str(url))
             if res.status_code != 200:
@@ -36,7 +36,7 @@ def new():
             value = current.current(soup,city_id)
             value = future.future(soup,value)
             rediskey = 'weather_' + str(city_id)
-            fixTodayMaxTem(value)
+            fixData(value)
             redisvalue = json.dumps(value)
             env.redis.set(rediskey, redisvalue)
             changenum = changenum +1
