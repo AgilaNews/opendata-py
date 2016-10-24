@@ -18,6 +18,7 @@ def future(soup,value):
         tablelist=range(1,4)
 
     value['days']=['0','1','2']
+    k=0
     for i in tablelist:
         tr = table[i].findAll('tr')
         lengthtr = len(tr)
@@ -30,14 +31,15 @@ def future(soup,value):
             desp[j - 1] = td[1].span.attrs['title']
         mintem = min(tem)
         maxtem = max(tem)
-        dateArray = n + datetime.timedelta(days=i)
+        dateArray = n + datetime.timedelta(days=k)
         weekday = dateArray.strftime("%A")
         monthday = "%s/%s" % (dateArray.month, dateArray.day)
 
-        value['days'][i] = {
+        value['days'][k] = {
                             "weekday": weekday,
                             "date": monthday,
                             "temperature": [maxtem, mintem],
                             "weather": desp[0]
                         }
+        k +=1
     return value
