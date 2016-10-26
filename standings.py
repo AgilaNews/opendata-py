@@ -63,13 +63,13 @@ def _handle_matches(obj):
         status = match[fields["GAME_STATUS_ID"]]
         game_id = match[fields["GAME_ID"]]
 
+        values = {}
         if status == 1:
             d = datetime.datetime.strptime(match[fields["GAME_DATE_EST"]], "%Y-%m-%dT%H:%M:%S")
             t = datetime.datetime.strptime(match[fields["GAME_STATUS_TEXT"]], "%I:%M %p ET")
             f = time.mktime(datetime.datetime.combine(d.date(), t.time()).timetuple())
             f = f + et_off - tz_off   
-        else:
-            f = 0
+            values["time"] =  f
         
         season = seasondao.getByYear(year)
         if not season:
@@ -82,15 +82,12 @@ def _handle_matches(obj):
             logging.warn("unknown visitor team %s" % visitor_team_id)
             continue
 
-        values = {
-            "game_id": game_id,
-            "time": f,
-            "home_team_id": home_team_id,
-            "visitor_team_id": visitor_team_id,
-            "status": status,
-            "season_year": season.year,
-            "update_time": time.time(),
-        }
+        values["game_id"] =  game_id
+        values["home_team_id"] = home_team_id
+        values["visitor_team_id"] =  visitor_team_id
+        values["status"] = status
+        values["season_year"] = season.year
+        values["update_time"] = time.time()
 
         match = matchdao.getByGameId(game_id)
         if match:
