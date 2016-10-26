@@ -11,5 +11,5 @@ import logging
 if __name__ == "__main__":
     logging.info("starts new crawler")
     n = datetime.datetime.now()
-    for i in range(0, 3):
+    for i in range(-1, 3):
         standings.crawl(n + datetime.timedelta(days = i))
