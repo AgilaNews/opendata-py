@@ -1,0 +1,14 @@
+{
+    "mysql": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "MhxzKhl-Happy!@#",
+        "db": "banews",
+        "charset": "utf8"
+    },
+    "redis": {
+        "host": "127.0.0.1",
+        "port": 6379
+    }
+}

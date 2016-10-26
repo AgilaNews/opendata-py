@@ -1,0 +1,15 @@
+{
+    "mysql": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "MhxzKhl-Happy",
+        "db": "banews",
+        "charset": "utf8mb4"
+    },
+    "redis": {
+        "host": "10.8.14.136",
+        "port": 6379
+    },
+    "cdn": "http://s1.agilanews.info"
+}
