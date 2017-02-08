@@ -3,7 +3,6 @@
 from sqlalchemy import engine, MetaData, create_engine
 from sqlalchemy import select
 import json
-import re
 import logging
 import env
 import current
@@ -20,14 +19,14 @@ result=env.engine.execute(s).fetchall()
 
 def fixData(weather_value):
     weather_value["days"][0]["weekday"] = "Today"
-    if int(weather_value["now"]["temperature"]) > weather_value["days"][0]["temperature"][0]:
-        weather_value["days"][0]["temperature"][0] = int(weather_value["now"]["temperature"])
+    if weather_value["now"]["temperature"] > weather_value["days"][0]["temperature"][0]:
+        weather_value["days"][0]["temperature"][0] = weather_value["now"]["temperature"]
         
 def new():
     changenum=0
     for x in result:
         city_id = x[1]
-        url = x[7]
+        url = 'http://weatherph.org/stations/' + str(city_id)
         try:
             res = network.req("get", str(url))
             if res.status_code != 200:
@@ -46,4 +45,3 @@ def new():
             logging.info(errormessage+e.message)
             logging.info(traceback.format_exc())
     logging.info(str(changenum)+'cities weather are updated')
-
